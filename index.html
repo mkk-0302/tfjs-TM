@@ -9,7 +9,11 @@
   <div id="webcam-container"></div>
   <div id="label-container"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tcript src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></"text/javascript">
+  <!-- スクリプトは body の最後に配置 -->
+  https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js
+  https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js
+
+  <script type="text/javascript">
     const URL = "https://teachablemachine.withgoogle.com/models/0vE8leCTD/";
 
     let model, webcam, labelContainer, maxPredictions;
