@@ -9,12 +9,12 @@
   <div id="webcam-container"></div>
   <div id="label-container"></div>
 
-  <!-- ✅ ライブラリを正しく読み込む -->
+  <!-- ライブラリ読み込み -->
   https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest
   https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest
 
   <script type="text/javascript">
-   achablemachine.withgoogle.com/models/0vE8leCTD/";
+    const URL = "https://teachablemachine.withgoogle.com/models/0vE8leCTD/";
 
     let model, webcam, labelContainer, maxPredictions;
 
@@ -39,13 +39,12 @@
     }
 
     async function loop() {
-      webcam.update();
-      await predict();
+      webcam.update      await predict();
       window.requestAnimationFrame(loop);
     }
 
     async function predict() {
-     .predict(webcam.canvas);
+      const prediction = await model.predict(webcam.canvas);
       for (let i = 0; i < maxPredictions; i++) {
         const classPrediction =
           prediction[i].className + ": " + prediction[i].probability.toFixed(2);
