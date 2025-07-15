@@ -10,11 +10,11 @@
   <div id="label-container"></div>
 
   <!-- ✅ ライブラリを正しく読み込む -->
-  https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js
-  https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js
+  https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest
+  https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest
 
   <script type="text/javascript">
-    const URL = "https://teachablemachine.withgoogle.com/models/0vE8leCTD/";
+   achablemachine.withgoogle.com/models/0vE8leCTD/";
 
     let model, webcam, labelContainer, maxPredictions;
 
@@ -29,27 +29,13 @@
       webcam = new tmImage.Webcam(200, 200, flip);
       await webcam.setup({ facingMode: { exact: "environment" } });
       await webcam.play();
-      window document.getElementById("webcam-container").appendChild(webcam.canvas);
+      window.requestAnimationFrame(loop);
+
+      document.getElementById("webcam-container").appendChild(webcam.canvas);
       labelContainer = document.getElementById("label-container");
       for (let i = 0; i < maxPredictions; i++) {
         labelContainer.appendChild(document.createElement("div"));
       }
     }
 
-    async function loop() {
-      webcam.update();
-      await predict();
-      window.requestAnimationFrame(loop);
-    }
-
-    async function predict() {
-      const prediction = await model.predict(webcam.canvas);
-; i < maxPredictions; i++) {
-        const classPrediction =
-          prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        labelContainer.childNodes[i].innerHTML = classPrediction;
-      }
-    }
-  </script>
-</body>
-</html>
+   
