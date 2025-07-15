@@ -9,7 +9,7 @@
   <div id="webcam-container"></div>
   <div id="label-container"></div>
 
-  <!-- ライブラリ読み込み -->
+  <!-- ✅ ライブラリを正しく読み込む -->
   https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js
   https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js
 
@@ -25,21 +25,11 @@
       model = await tmImage.load(modelURL, metadataURL);
       maxPredictions = model.getTotalClasses();
 
-      const flip = false; // 外カメラなので反転しない
+      const flip = false;
       webcam = new tmImage.Webcam(200, 200, flip);
-
-      // 外カメラを指定してセットアップ
-      await webcam.setup({ facingMode: { exact: "environment" } }).catch((err) => {
-        console.error("カメラセットアップ失敗:", err);
-      });
-
-      await webcam.play().catch((err) => {
-        console.error("カメラ再生失敗:", err);
-      });
-
-      window.requestAnimationFrame(loop);
-
-      document.getElementById("webcam-container").appendChild(webcam.canvas);
+      await webcam.setup({ facingMode: { exact: "environment" } });
+      await webcam.play();
+      window document.getElementById("webcam-container").appendChild(webcam.canvas);
       labelContainer = document.getElementById("label-container");
       for (let i = 0; i < maxPredictions; i++) {
         labelContainer.appendChild(document.createElement("div"));
@@ -54,7 +44,7 @@
 
     async function predict() {
       const prediction = await model.predict(webcam.canvas);
-      for (let i = 0; i < maxPredictions; i++) {
+; i < maxPredictions; i++) {
         const classPrediction =
           prediction[i].className + ": " + prediction[i].probability.toFixed(2);
         labelContainer.childNodes[i].innerHTML = classPrediction;
