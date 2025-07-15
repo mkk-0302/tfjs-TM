@@ -2,16 +2,13 @@
 <html>
 <head>
   <title>Teachable Machine Image Model</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.jsn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js
 </head>
 <body>
   <div>Teachable Machine Image Model</div>
   <button type="button" onclick="init()">Start</button>
   <div id="webcam-container"></div>
   <div id="label-container"></div>
-
-  <!-- スクリプトは body の最後に配置 -->
-  https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js
-  https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js
 
   <script type="text/javascript">
     const URL = "https://teachablemachine.withgoogle.com/models/0vE8leCTD/";
@@ -22,10 +19,7 @@
       const modelURL = URL + "model.json";
       const metadataURL = URL + "metadata.json";
 
-      model = await tmImage.load(modelURL, metadataURL);
-      maxPredictions = model.getTotalClasses();
-
-      const flip = true;
+      model = await tmImage.load(modelURL,      const flip = true;
       webcam = new tmImage.Webcam(200, 200, flip);
       await webcam.setup();
       await webcam.play();
@@ -33,16 +27,7 @@
 
       document.getElementById("webcam-container").appendChild(webcam.canvas);
       labelContainer = document.getElementById("label-container");
-      for (let i = 0; i < maxPredictions; i++) {
-        labelContainer.appendChild(document.createElement("div"));
       }
-    }
-
-    async function loop() {
-      webcam.update();
-      await predict();
-      window.requestAnimationFrame(loop);
-    }
 
     async function predict() {
       const prediction = await model.predict(webcam.canvas);
@@ -52,6 +37,5 @@
         labelContainer.childNodes[i].innerHTML = classPrediction;
       }
     }
-  </script>
-</body>
+ </body>
 </html>
